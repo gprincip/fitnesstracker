@@ -1,0 +1,197 @@
+29.08.2022
+PON 98.3kg
+UTO 98.7kg
+SRE 97.9kg
+CET 97.2kg
+PET 97.6kg
+SUB 97.1kg
+NED 97.0kg
+============= 97.7kg
+05.09.2022
+PON 97.7kg
+UTO 98.0kg
+SRE 97.8kg
+CET 97.8kg
+PET 98.2kg
+SUB 98.4kg
+NED 98.7kg
+============= 98kg
+12.09.2022
+PON 98.3kg
+UTO 98.0kg
+SRE 97.9kg
+CET 97.2kg
+PET X
+SUB 97.5kg
+NED 98.3kg
+============= 97.86kg
+19.09.2022
+PON 97.5kg
+UTO X
+SRE 97.8kg
+CET 98.0kg
+PET 97.9kg
+SUB 97.8kg
+NED 98.3kg
+============= 97.88kg
+26.09.2022
+PON 98.3kg
+UTO 98.1kg
+SRE 97.1kg
+CET 97.0kg
+PET 97.2kg
+SUB 97.8kg
+NED 97.8kg
+============= 97.6kg
+03.10.2022
+PON 97.4kg
+UTO 96.9kg
+SRE 97.2kg
+CET 96.3kg
+PET X
+SUB 96.5kg
+NED 97.2kg
+============= 96.9kg
+10.10.2022
+PON 96.4kg
+UTO 96.6kg
+SRE 97.3kg
+CET 97.2kg
+PET 96.5kg
+SUB 96.0kg
+NED 97.0kg
+============= 96.7kg
+17.10.2022
+PON 96.1kg
+UTO X
+SRE 96.3kg
+CET 97.2kg
+PET 97.0kg
+SUB X
+NED 96.6kg
+============= 96.6kg
+24.10.2022
+PON 96.5kg
+UTO 96.2kg
+SRE 95.5kg
+CET 96.2kg
+PET 95.2kg
+SUB X
+NED 96.0kg
+============= 95.9kg
+31.11.2022
+PON 96.6kg
+UTO 96.1kg
+SRE 95.6kg
+CET 95.4kg
+PET 95.6kg
+SUB 94.6kg
+NED 95.3kg
+============= 95.6kg
+07.11.2022
+PON 95.2kg
+UTO 95.5kg
+SRE 95.1kg
+CET 95.1kg
+PET 95.1kg
+SUB 95.6kg
+NED 96.4kg
+============= 95.4kg
+14.11.2022
+PON 94.9kg
+UTO 94.5kg
+SRE 94.9kg
+CET 95.2kg
+PET 94.5kg
+SUB 94.9kg
+NED 95.1kg
+============= 94.9kg
+21.11.2022
+PON 95.0kg
+UTO 94.8kg
+SRE 94.9kg
+CET 94.1kg
+PET 94.6kg
+SUB 94.9kg
+NED 95.2kg
+============== 94.8kg
+28.11.2022
+PON 94.0kg
+UTO 94.3kg
+SRE 94.4kg
+CET 94.5kg
+PET 94.7kg
+SUB 94.4kg
+NED 94.9kg
+============== 94.4kg
+05.12.2022
+PON 94.9kg
+UTO 94.3kg
+SRE 94.2kg
+CET 94.7kg
+PET 94.5kg
+SUB 94.0kg
+NED 94.4kg
+============== 94.4kg
+12.12.2022
+PON X
+UTO 94.1kg
+SRE 93.8kh
+CET 94.1kg
+PET 94.3kg
+SUB 94.0kg
+NED 94.1kg
+============== 94.1kg
+18.12.2022
+PON 94.0kg
+UTO 93.5kg
+SRE 93.5kg
+CET 93.2kg
+PET 94.1kg
+SUB 93.7kg
+NED 93.5kg
+============== 93.6kg
+26.11.2022
+PON 93.3kg
+UTO 93.1kg
+SRE 93.9kg
+CET 93.6kg
+PET 92.3kg
+SUB 93.1kg
+NED 92.3kg
+============== 93.1kg
+01.01.2023
+PON 92.1kg
+UTO 92.5kg
+SRE 92.6kg
+CET 92.7kg
+PET 92.2kg
+SUB 92.5kg
+NED 92.2kg
+============== 92.4kg
+09.01.2023
+PON 93.3kg
+UTO 92.8kg
+SRE 93.0kg
+CET 92.3kg
+PET 92.3kg
+SUB 92.2kg
+NED 92.1kg
+============= 92.6kg
+16.01.2023
+PON 91.8kg
+UTO 91.7kg
+SRE 92.2kg
+CET 93.4kg
+PET 92.9kg
+SUB 93.3kg
+NED 93.7kg
+============
+23.01.2023
+PON 93.3kg
+UTO 93.5kg
+SRE 93.7kg
+CET 93.4kg
+PET 94.2kg
+SUB 93.3kg
+
