@@ -7,6 +7,7 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.OptionalDouble;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fitnesstracker.fitnesstracker.core.domain.Constants;
 import com.fitnesstracker.fitnesstracker.core.domain.WeightData;
+import com.fitnesstracker.fitnesstracker.util.FileUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,7 +31,7 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 		File weightsFile = new File(Constants.WEIGHTS_FILE_PATH);
 		try (Writer writer = new FileWriter(weightsFile, true)){
 			
-			writeDataToFile(writer, data);
+			writeDataToFile(writer, data, FileUtils.readTextFromFile(weightsFile));
 			
 			if (data.getTimestamp().getDayOfWeek() == DayOfWeek.SUNDAY) {
 				List<WeightData> currentWeekData = weightAnalyzer.extractCurrentWeeksData(weightsFile);
@@ -43,14 +45,31 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 		
 	}
 
-	private void writeDataToFile(Writer writer, WeightData data) {
+	private void writeDataToFile(Writer writer, WeightData data, List<String> text) {
 		try {
+			
+			if(getLastNotEmptyLine(text).contains(Constants.END_OF_WEEK_LINE)) {
+				writer.append("\n")
+					  .append(LocalDateTime.now().format(Constants.DATE_FORMAT));
+			}
+			
 			//TODO: don't add \n at the beginning of the line. If file is empty, this will create first empty line
 			writer.append("\n" + weekDayToText(data.getTimestamp().getDayOfWeek()));
 			writer.append(" " + data.getWeight() + data.getWeightUnit().name());
 		} catch (IOException e) {
 			log.error("Error writing to a file", e);
 		}
+	}
+
+	private String getLastNotEmptyLine(List<String> list) {
+		
+		for(int i = list.size() - 1; i >= 0; i--) {
+			if(list.get(i).length() > 0) {
+				return list.get(i);
+			}
+		}
+		
+		return "";
 	}
 
 	private CharSequence weekDayToText(DayOfWeek dayOfWeek) {
@@ -73,7 +92,9 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 
 	private void drawLineAndAvgWeight(Writer writer, List<WeightData> currentWeekData) throws IOException {
 		
-		String avgWeight = new BigDecimal(calculateAverageWeight(currentWeekData)).setScale(2, RoundingMode.CEILING).toString();
+		String avgWeight = new BigDecimal(calculateAverageWeight(currentWeekData))
+				.setScale(2, RoundingMode.CEILING)
+				.toString();
 		
 		writer.append("\n")
 			  .append(Constants.END_OF_WEEK_LINE)
