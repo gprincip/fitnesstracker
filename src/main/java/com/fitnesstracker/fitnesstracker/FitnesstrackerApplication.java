@@ -16,8 +16,9 @@ public class FitnesstrackerApplication {
 		SpringApplication.run(FitnesstrackerApplication.class, args);
 		
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(BeansConfiguration.class);
-		WeightInputAdapter weightInputAdapter = new WeightInputAdapterImpl(ctx);
-		weightInputAdapter.takeWeightInputs();
+		//WeightInputAdapter weightInputAdapter = new WeightInputAdapterImpl(ctx);
+		//weightInputAdapter.takeWeightInputs();
+		ctx.getBean(WeightInputAdapter.class).takeWeightInputs();
 	}
 
 }

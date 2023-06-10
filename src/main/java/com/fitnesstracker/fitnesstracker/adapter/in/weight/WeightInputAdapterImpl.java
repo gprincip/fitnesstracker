@@ -3,7 +3,9 @@ package com.fitnesstracker.fitnesstracker.adapter.in.weight;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.fitnesstracker.fitnesstracker.adapter.out.WeightPersistAdapter;
 import com.fitnesstracker.fitnesstracker.core.domain.WeightData;
@@ -11,13 +13,10 @@ import com.fitnesstracker.fitnesstracker.core.domain.WeightUnit;
 
 public class WeightInputAdapterImpl implements WeightInputAdapter {
 
-	ApplicationContext context;
+	@Autowired
 	WeightPersistAdapter weightPeristPort;
 	
-	public WeightInputAdapterImpl(ApplicationContext ctx) {
-		this.context = ctx;
-		weightPeristPort = ctx.getBean(WeightPersistAdapter.class);
-	}
+	public WeightInputAdapterImpl() {}
 
 	@Override
 	public void takeWeightInputs() {
