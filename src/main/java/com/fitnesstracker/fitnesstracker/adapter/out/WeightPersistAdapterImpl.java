@@ -31,7 +31,7 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 			
 			writeDataToFile(writer, data);
 			
-			if (data.getTimestamp().getDayOfWeek() == DayOfWeek.SATURDAY) {
+			if (data.getTimestamp().getDayOfWeek() == DayOfWeek.SUNDAY) {
 				List<WeightData> currentWeekData = weightAnalyzer.extractCurrentWeeksData(weightsFile);
 				drawLineAndAvgWeight(writer, currentWeekData);
 				executeSundayReport(writer, currentWeekData);
