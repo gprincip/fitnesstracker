@@ -28,7 +28,9 @@ public class WeightAnalyzerStandard implements WeightAnalyzerPort{
 			}
 			
 			WeightData data = ConvertUtils.oneLineToWeightData(lines.get(i));
-			currentWeek.add(data);
+			if(data != null) {
+				currentWeek.add(data);
+			}
 		}
 		
 		return currentWeek;

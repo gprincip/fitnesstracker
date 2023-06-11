@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fitnesstracker.fitnesstracker.core.domain.Constants;
 import com.fitnesstracker.fitnesstracker.core.domain.WeightData;
+import com.fitnesstracker.fitnesstracker.util.ConvertUtils;
 import com.fitnesstracker.fitnesstracker.util.FileUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 			
 			writeDataToFile(writer, data, FileUtils.readTextFromFile(weightsFile));
 			
-			if (data.getTimestamp().getDayOfWeek() == DayOfWeek.SUNDAY) {
+			if (isNewWeek(data)) {
 				List<WeightData> currentWeekData = weightAnalyzer.extractCurrentWeeksData(weightsFile);
 				drawLineAndAvgWeight(writer, currentWeekData);
 				executeSundayReport(writer, currentWeekData);
@@ -45,6 +46,15 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 		
 	}
 
+	/**
+	 * @param data 
+	 * @return true if current day is the week after the previous entry's week
+	 */
+	private boolean isNewWeek(WeightData data) {
+		//TODO: Optimize this logic so it's not strictly working with SUNDAY
+		return (data.getTimestamp().getDayOfWeek() == DayOfWeek.SUNDAY);
+	}
+
 	private void writeDataToFile(Writer writer, WeightData data, List<String> text) {
 		try {
 			
@@ -54,7 +64,7 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 			}
 			
 			//TODO: don't add \n at the beginning of the line. If file is empty, this will create first empty line
-			writer.append("\n" + weekDayToText(data.getTimestamp().getDayOfWeek()));
+			writer.append("\n" + ConvertUtils.weekDayToText(data.getTimestamp().getDayOfWeek()));
 			writer.append(" " + data.getWeight() + data.getWeightUnit().name());
 		} catch (IOException e) {
 			log.error("Error writing to a file", e);
@@ -70,19 +80,6 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 		}
 		
 		return "";
-	}
-
-	private CharSequence weekDayToText(DayOfWeek dayOfWeek) {
-		switch(dayOfWeek) {
-		case MONDAY : return "PON";
-		case TUESDAY : return "UTO";
-		case WEDNESDAY : return "SRE";
-		case THURSDAY : return "CET";
-		case FRIDAY : return "PET";
-		case SATURDAY : return "SUB";
-		case SUNDAY : return "NED";
-		default : return "?";
-		}
 	}
 
 	private void executeSundayReport(Writer writer, List<WeightData> currentWeekData) {
