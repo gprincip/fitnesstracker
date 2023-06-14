@@ -12,7 +12,7 @@ import com.fitnesstracker.fitnesstracker.util.FileUtils;
 public class WeightAnalyzerStandard implements WeightAnalyzerPort{
 
 	@Override
-	public List<WeightData> extractCurrentWeeksData(File weightsFile) {
+	public List<WeightData> extractLastWeeksData(File weightsFile) {
 		
 		List<String> lines = FileUtils.readTextFromFile(weightsFile);
 		List<WeightData> currentWeek = new ArrayList<>();

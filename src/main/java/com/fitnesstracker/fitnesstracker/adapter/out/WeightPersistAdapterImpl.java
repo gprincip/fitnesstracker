@@ -35,9 +35,9 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 			writeDataToFile(writer, data, FileUtils.readTextFromFile(weightsFile));
 			
 			if (isNewWeek(data)) {
-				List<WeightData> currentWeekData = weightAnalyzer.extractCurrentWeeksData(weightsFile);
-				drawLineAndAvgWeight(writer, currentWeekData);
-				executeSundayReport(writer, currentWeekData);
+				List<WeightData> lastWeekData = weightAnalyzer.extractLastWeeksData(weightsFile);
+				drawLineAndAvgWeight(writer, lastWeekData);
+				executeSundayReport(writer, lastWeekData);
 			}
 			
 		} catch (Exception e) {
@@ -47,12 +47,12 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 	}
 
 	/**
-	 * @param data 
+	 * @param lastWeekData 
 	 * @return true if current day is the week after the previous entry's week
 	 */
-	private boolean isNewWeek(WeightData data) {
+	private boolean isNewWeek(WeightData lastWeekData) {
 		//TODO: Optimize this logic so it's not strictly working with SUNDAY
-		return (data.getTimestamp().getDayOfWeek() == DayOfWeek.SUNDAY);
+		return (lastWeekData.getTimestamp().getDayOfWeek() == DayOfWeek.SUNDAY);
 	}
 
 	private void writeDataToFile(Writer writer, WeightData data, List<String> text) {

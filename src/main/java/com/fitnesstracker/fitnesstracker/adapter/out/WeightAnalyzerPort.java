@@ -7,6 +7,6 @@ import com.fitnesstracker.fitnesstracker.core.domain.WeightData;
 
 public interface WeightAnalyzerPort {
 
-	List<WeightData> extractCurrentWeeksData(File weightsFile);
+	List<WeightData> extractLastWeeksData(File weightsFile);
 
 }
