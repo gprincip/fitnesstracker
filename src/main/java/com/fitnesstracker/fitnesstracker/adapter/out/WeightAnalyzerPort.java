@@ -8,5 +8,6 @@ import com.fitnesstracker.fitnesstracker.core.domain.WeightData;
 public interface WeightAnalyzerPort {
 
 	List<WeightData> extractLastWeeksData(File weightsFile);
+	List<WeightData> extractLastWeeksDataSortedAsc(List<String> weightsFile);
 
 }

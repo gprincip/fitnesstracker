@@ -35,6 +35,7 @@ public class WeightInputAdapterImpl implements WeightInputAdapter {
 		data.setWeight(weightDbl);
 		data.setWeightUnit(WeightUnit.KG);
 		data.setTimestamp(now);
+		data.setDayOfWeek(now.getDayOfWeek());
 		
 		weightPeristPort.persistWeightData(data);
 		
