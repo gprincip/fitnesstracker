@@ -121,7 +121,8 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 		writer.append("\n")
 			  .append(Constants.END_OF_WEEK_LINE)
 			  .append(Constants.SPACE_AFTER_END_OF_WEEK_LINE)
-			  .append(avgWeight);
+			  .append(avgWeight)
+			  .append(currentWeekData.get(0).getWeightUnit().name());
 	}
 	
 	private Double calculateAverageWeight(List<WeightData> data) {
