@@ -11,6 +11,9 @@ import com.fitnesstracker.fitnesstracker.adapter.out.WeightPersistAdapter;
 import com.fitnesstracker.fitnesstracker.core.domain.WeightData;
 import com.fitnesstracker.fitnesstracker.core.domain.WeightUnit;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class WeightInputAdapterImpl implements WeightInputAdapter {
 
 	@Autowired
@@ -39,5 +42,11 @@ public class WeightInputAdapterImpl implements WeightInputAdapter {
 		
 		weightPeristPort.persistWeightData(data);
 		
+		System.out.println("Thank you!");
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			log.error("Error while sleeping!",e);
+		}
 	}
 }

@@ -29,6 +29,9 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 	WeightAnalyzerPort weightAnalyzer;
 	
 	@Override
+	/**
+	 * Entry point of entered data
+	 */
 	public void persistWeightData(WeightData data) {
 		
 		File weightsFile = new File(Constants.WEIGHTS_FILE_PATH);
@@ -38,6 +41,11 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 			List<WeightData> lastWeekData = weightAnalyzer.extractLastWeeksDataSortedAsc(lines);
 			
 			boolean isSameWeek = isSameWeek(getLastEntry(lastWeekData), data);
+			
+			//if data to be persisted is from the current week, add it also to lastWeekData list
+			if(isSameWeek) {
+				lastWeekData.add(data);
+			}
 			
 			if(data.getDayOfWeek() == DayOfWeek.SUNDAY && isSameWeek) {
 				
@@ -59,11 +67,21 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 		}
 		
 	}
-
+	/**
+	 * 
+	 * @param lastEntry from last week
+	 * @param dataToPersist
+	 * @return
+	 */
 	private boolean isSameWeek(WeightData lastEntry, WeightData dataToPersist) {
 		
-		// if weekday number of data to persist is greater then last saved entry
-		if (dataToPersist.getDayOfWeek().getValue() > lastEntry.getDayOfWeek().getValue()) {
+		//if there is no data in the last week, it must be a new week
+		if(lastEntry == null) {
+			return false;
+		}
+		
+		// if weekday number of data to persist is greater or equal to the last saved entry
+		if (dataToPersist.getDayOfWeek().getValue() >= lastEntry.getDayOfWeek().getValue()) {
 			// difference between those two must be less then 7 days in order to be same week
 			if(ChronoUnit.DAYS.between(lastEntry.getTimestamp(), dataToPersist.getTimestamp()) < 7) {
 				return true;
@@ -78,15 +96,15 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 	}
 
 	private WeightData getLastEntry(List<WeightData> lastWeekData) {
-		return lastWeekData.get(lastWeekData.size()-1);
+		if(lastWeekData != null && !lastWeekData.isEmpty()) {
+			return lastWeekData.get(lastWeekData.size()-1);
+		}else {
+			return null;
+		}
 	}
 
 	private void writeDataToFile(Writer writer, WeightData data, List<String> text) {
 		try {
-			
-			if(getLastNotEmptyLine(text).contains(Constants.END_OF_WEEK_LINE)) {
-				printDateAtTheBeginningOfWeek(writer);
-			}
 			
 			//TODO: don't add \n at the beginning of the line. If file is empty, this will create first empty line
 			writer.append("\n" + ConvertUtils.weekDayToSrbText(data.getTimestamp().getDayOfWeek()));
@@ -101,18 +119,12 @@ public class WeightPersistAdapterImpl implements WeightPersistAdapter{
 		writer.append("\n").append(LocalDateTime.now().format(Constants.DATE_FORMAT));
 	}
 
-	private String getLastNotEmptyLine(List<String> list) {
-		
-		for(int i = list.size() - 1; i >= 0; i--) {
-			if(list.get(i).length() > 0) {
-				return list.get(i);
-			}
-		}
-		
-		return "";
-	}
-
 	private void drawLineAndAvgWeight(Writer writer, List<WeightData> currentWeekData) throws IOException {
+		
+		//if there is no data in the current week, we don't need to write anything
+		if(currentWeekData == null || currentWeekData.isEmpty()) {
+			return;
+		}
 		
 		String avgWeight = new BigDecimal(calculateAverageWeight(currentWeekData))
 				.setScale(2, RoundingMode.CEILING)

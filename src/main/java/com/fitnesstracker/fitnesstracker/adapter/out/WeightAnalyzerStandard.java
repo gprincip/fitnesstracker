@@ -13,6 +13,10 @@ import com.fitnesstracker.fitnesstracker.core.domain.WeightData;
 import com.fitnesstracker.fitnesstracker.util.ConvertUtils;
 import com.fitnesstracker.fitnesstracker.util.FileUtils;
 
+/**
+ * Analyzer extracts metadata from weight data
+ * @author Gavrilo
+ */
 public class WeightAnalyzerStandard implements WeightAnalyzerPort{
 
 	@Override
@@ -46,8 +50,10 @@ public class WeightAnalyzerStandard implements WeightAnalyzerPort{
 			}
 		}
 		
-		populateDatesForFoundEntries(date.atStartOfDay(), currentWeek);
-		Collections.sort(currentWeek);
+		if(!currentWeek.isEmpty()) {
+			populateDatesForFoundEntries(date.atStartOfDay(), currentWeek);
+			Collections.sort(currentWeek);
+		}
 		
 		return currentWeek;
 	}
