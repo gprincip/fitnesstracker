@@ -42,7 +42,10 @@ public class WeightAnalyzerStandard implements WeightAnalyzerPort{
 				continue;
 			}
 			
-			date = tryToParseDate(weightsFileLines.get(i));
+			LocalDate dateTmp = tryToParseDate(weightsFileLines.get(i));
+			if(dateTmp != null) {
+				date = dateTmp;
+			}
 			
 			WeightData data = ConvertUtils.oneLineToWeightData(weightsFileLines.get(i));
 			if(data != null) {
